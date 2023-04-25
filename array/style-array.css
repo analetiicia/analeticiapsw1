@@ -1,0 +1,20 @@
+body{
+    background-color: rgb(183, 237, 183);
+    color: rgb(89, 143, 89);
+    font-size: large;
+}
+
+h1,h2{
+    font-family: italic;
+    color: aliceblue;
+    text-align: center;
+}
+
+hr{
+    margin-top: 50px;
+}
+
+pre{
+    background-color: rgb(241, 241, 241);
+    padding: 10px;
+}
