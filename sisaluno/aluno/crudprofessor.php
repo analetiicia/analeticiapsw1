@@ -18,7 +18,7 @@
 <body style="background-color: #DCDCDC; padding: 0; height: 100vh; width: 100%; font-family: 'Arial Black', Gadget, sans-serif; color:#DCDCDC; display: flex; justify-content: center; align-items:center; flex-direction: column; margin: 0">
 
     <header style = "background-color: #7B8F82; height: 100px; margin: 0; display: flex; justify-content: center; align-items: center;  font-size: larger; width: 100%;  padding: 0;">
-    <h2 style="">CADASTRO DE ALUNO</h2> 
+    <h2 style="">CADASTRO DE PROFESSOR</h2> 
     </header>
 <?php
 ##permite acesso as variaves dentro do aquivo conexao
@@ -29,19 +29,18 @@ require_once('conexao.php');
 ##cadastrar
 if(isset($_GET['cadastrar'])){
         ##dados recebidos pelo metodo GET
-      
+       
         $nome = $_GET["nome"];
-        $endereco = $_GET["endereco"];
+        $cpf = $_GET["cpf"];
         $idade = $_GET["idade"];
         //$statusaluno = $_GET["statusaluno"];
-        $matricula = $_GET["matricula"];
-
-        $datadenascimento = $_GET["datadenascimento"];
+        //$matricula = $_GET["matricula"];
+       // $datadenascimento = $_GET["datanascimento"];
 
 
         ##codigo SQL
-        $sql = "INSERT INTO aluno(nome,endereco,idade, matricula, datadenascimento ) 
-                VALUES('$nome','$endereco','$idade', '$matricula', '$datadenascimento')";
+        $sql = "INSERT INTO professor(nome,cpf,idade ) 
+                VALUES('$nome','$cpf','$idade')";
 
         ##junta o codigo sql a conexao do banco
         $sqlcombanco = $conexao->prepare($sql);
@@ -50,7 +49,7 @@ if(isset($_GET['cadastrar'])){
         if($sqlcombanco->execute())
             {
                 echo "<div>";
-                echo " <strong>OK!</strong> O aluno
+                echo " <strong>OK!</strong> O professor
                 $nome foi cadastrado com sucesso!!!"; 
                 echo "</div>";
             }
@@ -61,12 +60,12 @@ if(isset($_POST['update'])){
     ##dados recebidos pelo metodo POST
     $nome = $_POST["nome"];
     $idade = $_POST["idade"];
-    $endereco = $_POST["endereco"];
+    $cpf = $_POST["cpf"];
 
     $id = $_POST["id"];
    
       ##codigo sql
-    $sql = "UPDATE  aluno SET nome= :nome, idade= :idade, endereco= :endereco WHERE id= :id ";
+    $sql = "UPDATE  professor SET nome= :nome, idade= :idade, cpf= :cpf WHERE id= :id ";
    
     ##junta o codigo sql a conexao do banco
     $stmt = $conexao->prepare($sql);
@@ -75,7 +74,7 @@ if(isset($_POST['update'])){
     $stmt->bindParam(':id',$id, PDO::PARAM_INT);
     $stmt->bindParam(':nome',$nome, PDO::PARAM_STR);
     $stmt->bindParam(':idade',$idade, PDO::PARAM_INT);
-    $stmt->bindParam(':endereco',$endereco, PDO::PARAM_STR);
+    $stmt->bindParam(':cpf',$cpf, PDO::PARAM_STR);
     $stmt->execute();
  
 
@@ -83,7 +82,7 @@ if(isset($_POST['update'])){
     if($stmt->execute())
         {
             echo "<div>";
-            echo " <strong>OK!</strong> o aluno
+            echo " <strong>OK!</strong> O professor
              $nome foi alterado com sucesso."; 
             echo "</div>";
         }
@@ -94,7 +93,7 @@ if(isset($_POST['update'])){
 ##Excluir
 if(isset($_GET['excluir'])){
     $id = $_GET['id'];
-    $sql ="DELETE FROM `aluno` WHERE id={$id}";
+    $sql ="DELETE FROM `professor` WHERE id={$id}";
     $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);   
     $stmt = $conexao->prepare($sql);
     $stmt->execute();
@@ -102,7 +101,7 @@ if(isset($_GET['excluir'])){
     if($stmt->execute())
         {
             echo "<div>"; 
-            echo " <strong>OK!</strong> o aluno
+            echo " <strong>OK!</strong> o Professor
              $id foi excluido com sucesso."; 
              echo "</div>";
 
@@ -115,7 +114,7 @@ if(isset($_GET['excluir'])){
 
 
 <button class="button" style = "height: 40px; width: 100px; background-color: #7B8F82 ; border-radius: 10px; border-color: transparent;  text-decoration: none; color: white; font-family: 'Arial Black', Gadget, sans-serif; margin-top: 50px; "><a href="index.php">Página Inicial</a></button>
-<button class="button" style = "height: 40px; width: 100px; background-color: #7B8F82 ; border-radius: 10px; border-color: transparent;  text-decoration: none; color: white; font-family: 'Arial Black', Gadget, sans-serif; margin-top: 50px; "><a href="listaaluno.php">Lista de Alunos</a></button>
+<button class="button" style = "height: 40px; width: 100px; background-color: #7B8F82 ; border-radius: 10px; border-color: transparent;  text-decoration: none; color: white; font-family: 'Arial Black', Gadget, sans-serif; margin-top: 50px; "><a href="listaprofessor.php">Lista de Professores</a></button>
 
 
 </body>

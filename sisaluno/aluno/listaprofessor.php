@@ -13,7 +13,7 @@
 }
 
         table{
-        margin-left: 250px;
+        margin-left: 500px;
         }
 
         
@@ -23,7 +23,7 @@
 <body style = "background-color: #DCDCDC; padding: 0; height: 100vh; width: 100%; font-family: 'Arial Black', Gadget, sans-serif; color:#DCDCDC; ">
 
 <header style = "background-color: #7B8F82; height: 100px; margin: 0; display: flex; justify-content: center; align-items: center;  font-size: larger; width: 100%;  padding: 0; margin-bottom: 50px;">
-    <h1>LISTA DE ALUNOS</h1> 
+    <h1>LISTA DE PROFESSORES</h1> 
     </header>
 
    <?php 
@@ -33,7 +33,7 @@
  */
   require_once('conexao.php');
    
-  $retorno = $conexao->prepare('SELECT * FROM aluno');
+  $retorno = $conexao->prepare('SELECT * FROM professor');
   $retorno->execute();
 
 ?>       
@@ -62,7 +62,7 @@
   padding-bottom: 12px;
   text-align: left;
   background-color: gray;
-  color:#DCDCDC;" >ENDEREÇO</th>
+  color:#DCDCDC;" >CPF</th>
 
 <th style ="  padding-top: 12px;
   padding-bottom: 12px;
@@ -70,14 +70,7 @@
   background-color: gray;
   color:#DCDCDC;" >DATA</th>
                 
-                
-                
-
-                <th style ="  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: gray;
-  color:#DCDCDC;" >MATRÍCULA</th>
+        
                 </tr>
             </thead>
 
@@ -89,13 +82,11 @@
                             <td> <?php echo $value['id']?>  </td> 
                             <td> <?php echo $value['nome']?>  </td> 
                             <td> <?php echo $value['idade']?> </td> 
-                            <td> <?php echo $value['endereco']?> </td> 
-                            <td> <?php echo $value['datadenascimento']?> </td> 
-
-                            <td> <?php echo $value['matricula']?> </td>
+                            <td> <?php echo $value['cpf']?> </td> 
+                            <td> <?php echo $value['datanascimento']?> </td> 
 
                             <td>
-                               <form method="POST" action="altaluno.php">
+                               <form method="POST" action="altprofessor.php">
 
                                         <input name="id" type="hidden" value=" <?php echo $value['id'];?>"/>
                                         <input name="nome" type="hidden" value=" <?php echo $value['nome'];?>"/>
@@ -105,7 +96,7 @@
                              </td> 
 
                              <td>
-                               <form method="GET" action="crudaluno.php">
+                               <form method="GET" action="crudprofessor.php">
                                         <input name="id" type="hidden" value="<?php echo $value['id'];?>"/>
                                         <button name="excluir"  type="submit" style = "height: 40px; width: 100px; background-color: gray; border-radius: 10px; border-color: transparent; margin-bottom: 40px; color:#DCDCDC; font-size: larger;">Excluir</button>
                                 </form>
@@ -121,8 +112,7 @@
         </table>
         <div style = "display: flex; align-items: center; justify-content: center; margin-top: 10px;">
         <button class="button" style = "height: 40px; width: 100px; background-color: #7B8F82; border-radius: 10px; border-color: transparent; margin-bottom: 40px; text-decoration: none; color: white; display: flex; align-items: center; justify-content: center; margin-top: 10px;"><a href="index.php">Voltar</a></button>
-        <button class="button" style = "height: 40px; width: 100px; background-color: #7B8F82; border-radius: 10px; border-color: transparent; margin-bottom: 40px; text-decoration: none; color: white; display: flex; align-items: center; justify-content: center; margin-top: 10px; margin-left: 5px;"><a href="cadaluno.php">Cadastrar</a></button>
+        <button class="button" style = "height: 40px; width: 100px; background-color: #7B8F82; border-radius: 10px; border-color: transparent; margin-bottom: 40px; text-decoration: none; color: white; display: flex; align-items: center; justify-content: center; margin-top: 10px; margin-left: 5px;"><a href="cadprofessor.php">Cadastrar</a></button>
         </div>
 </body>
 </html>
-
